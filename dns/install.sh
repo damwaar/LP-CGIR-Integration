@@ -6,14 +6,14 @@
 # Installation des fichiers de configuration de Bind9
 
 if [ ! -e /usr/sbin/named ]; then
-	echo "BIND9 n'est pas installé."
-	echo "=> apt-get install bind9"
+	echo "BIND9 is not installed."
+	echo "=> 'apt-get install bind9' to fix."
 	echo "exiting..."
 	exit 1
 fi
 
 if [ ! -d "/var/bind" ]; then
-	echo "création du répertoire /var/bind"
+	echo "creating directory /var/bind"
 	mkdir /var/bind 2> /dev/null
 	chown bind:bind /var/bind 2> /dev/null
 	chmod 700 /var/bind 2> /dev/null
