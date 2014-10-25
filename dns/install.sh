@@ -5,7 +5,7 @@
 
 # Installation des fichiers de configuration de Bind9
 
-if [ ! -f /usr/sbin/named ]; then
+if [ ! -e /usr/sbin/named ]; then
 	echo "BIND9 n'est pas installé."
 	echo "=> apt-get install bind9"
 	echo "exiting..."
@@ -14,23 +14,22 @@ fi
 
 if [ ! -d "/var/bind" ]; then
 	echo "création du répertoire /var/bind"
-	mkdir /var/bind
-	chown bind:bind /var/bind
-	chmod 700 /var/bind
+	mkdir /var/bind 2> /dev/null
+	chown bind:bind /var/bind 2> /dev/null
+	chmod 700 /var/bind 2> /dev/null
 fi
 
 # copie des fichiers de configuration et déclaration
-cp --interactive named.conf /etc/bind/
-cp --interactive named.conf.local /etc/bind/
-cp --interactive named.conf.options /etc/bind/
+cp --interactive named.conf /etc/bind/ 2> /dev/null
+cp --interactive named.conf.local /etc/bind/ 2> /dev/null
+cp --interactive named.conf.options /etc/bind/ 2> /dev/null
 
 #copie des fichiers de zone
-cp --interactive pain-jacques.fr /var/bind/
-cp --interactive pain-jacques.fr.140.rev /var/bind/
+FILE="pain-jacques.fr" ; cp --interactive $FILE /var/bind/ 2> /dev/null && chown bind:bind /var/bind/$FILE
+FILE="pain-jacques.fr.140.rev" ; cp --interactive $FILE /var/bind/ 2> /dev/null && chown bind:bind /var/bind/$FILE
 
 if [ ! $? ]; then
-	echo ""
-	echo "[ OK ]"
+	service bind restart
 fi
 
 exit 0
