@@ -1,0 +1,40 @@
+;
+; BIND data file for zone licence-rt.org
+;
+$ORIGIN	pain-jacques.fr.
+$TTL	604800
+@	IN	SOA	ns1.pain-jacques.fr. root.pain-jacques.fr. (
+		     2014101603		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+	IN	NS	ns1.pain-jacques.fr.
+;	IN	NS	ns2.licence-rt.org.
+
+; VLAN administration système
+;@		IN	A	192.168.140.5
+routeur-site	IN	A	192.168.140.1
+dhcp1		IN	A	192.168.140.2
+ns1		IN	A	192.168.140.3
+ldap1		IN	A	192.168.140.4
+mail1		IN	A	192.168.140.5
+;imap1		IN	A	192.168.140.6
+www		IN	A	192.168.140.7
+;
+
+;VPN
+vpn1		IN	A	192.168.250.14
+
+;Wifi
+wifi-fw		IN	A	192.168.250.10
+
+;routeur sortie
+;routeur1	IN	A	192.168.250.1
+
+;smtp
+pain-jacques.fr.	IN	MX	10 mail1
+smtp		IN	CNAME	mail1
+pop		IN	CNAME	mail1
+imap		IN	CNAME	mail1
