@@ -1,0 +1,134 @@
+
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname rb1
+!
+boot-start-marker
+boot-end-marker
+!
+!card type command needed for slot 1
+!
+no aaa new-model
+no network-clock-participate slot 1 
+!
+!
+ip cef
+!
+!
+ip auth-proxy max-nodata-conns 3
+ip admission max-nodata-conns 3
+!
+!
+voice-card 0
+ no dspfarm
+!
+voice-card 1
+ no dspfarm
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.8
+ encapsulation dot1Q 8
+ ip address 192.168.250.9 255.255.255.252
+!
+interface FastEthernet0/1.12
+ encapsulation dot1Q 12
+ ip address 192.168.250.13 255.255.255.252
+!
+interface FastEthernet0/1.140
+ encapsulation dot1Q 140
+ ip address 192.168.140.1 255.255.255.0
+!
+interface FastEthernet0/1.141
+ encapsulation dot1Q 141
+ ip address 192.168.141.1 255.255.255.0
+ ip helper-address 192.168.140.2
+!
+interface FastEthernet0/1.142
+ encapsulation dot1Q 142
+ ip address 192.168.142.1 255.255.255.0
+ ip helper-address 192.168.140.2
+!
+interface FastEthernet0/3/0
+!
+interface FastEthernet0/3/1
+!
+interface FastEthernet0/3/2
+!
+interface FastEthernet0/3/3
+!
+interface Vlan1
+ no ip address
+!
+ip forward-protocol nd
+!
+!
+ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+!
+voice-port 0/0/0
+!
+voice-port 0/0/1
+!
+voice-port 0/2/0
+!
+voice-port 0/2/1
+!
+!
+!
+!
+!
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+line aux 0
+line vty 0 4
+ login
+!
+scheduler allocate 20000 1000
+!
+end
