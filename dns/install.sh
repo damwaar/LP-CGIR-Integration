@@ -20,16 +20,16 @@ if [ ! -d "/var/bind" ]; then
 fi
 
 # copie des fichiers de configuration et déclaration
-cp --interactive named.conf /etc/bind/ 2> /dev/null
-cp --interactive named.conf.local /etc/bind/ 2> /dev/null
-cp --interactive named.conf.options /etc/bind/ 2> /dev/null
+cp --interactive named.conf /etc/bind/
+cp --interactive named.conf.local /etc/bind/
+cp --interactive named.conf.options /etc/bind/
 
 #copie des fichiers de zone
-FILE="pain-jacques.fr" ; cp --interactive $FILE /var/bind/ 2> /dev/null && chown bind:bind /var/bind/$FILE
-FILE="pain-jacques.fr.140.rev" ; cp --interactive $FILE /var/bind/ 2> /dev/null && chown bind:bind /var/bind/$FILE
+FILE="pain-jacques.fr" ; cp --interactive $FILE /var/bind/ && chown bind:bind /var/bind/$FILE
+FILE="pain-jacques.fr.140.rev" ; cp --interactive $FILE /var/bind/ && chown bind:bind /var/bind/$FILE
 
-if [ ! $? ]; then
-	service bind restart
+if [ $? ]; then
+	service bind9 restart
 fi
 
 exit 0
